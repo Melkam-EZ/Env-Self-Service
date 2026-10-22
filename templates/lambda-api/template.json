@@ -1,0 +1,14 @@
+{
+  "name": "lambda-api",
+  "title": "Lambda function with URL",
+  "description": "A small Python Lambda behind a function URL protected by IAM (SigV4) auth, with 1-day log retention. Pay-per-request, so idle cost is zero.",
+  "provider": "aws",
+  "params": {
+    "message": {"type": "string", "default": "hello from envp", "max_length": 40, "description": "Returned by the function"},
+    "memory_mb": {"type": "enum", "values": [128, 256, 512], "default": 128, "description": "Function memory"}
+  },
+  "ttl": {"min_minutes": 15, "default_minutes": 120, "max_minutes": 720},
+  "cost": {"hourly_usd": 0.0, "param_rates": {"memory_mb": {"128": 0.0, "256": 0.0005, "512": 0.001}}},
+  "approval_rules": [],
+  "max_extensions": 3
+}

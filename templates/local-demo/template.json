@@ -1,0 +1,14 @@
+{
+  "name": "local-demo",
+  "title": "Local demo (no cloud)",
+  "description": "Writes a small file on the portal host. Free and instant, needs no cloud account. The prices are pretend, so you can try budgets and approvals without spending anything.",
+  "provider": "local",
+  "params": {
+    "greeting": {"type": "string", "default": "hello", "max_length": 40, "description": "Text written into the file"},
+    "tier": {"type": "enum", "values": ["small", "large"], "default": "small", "description": "Pretend size (changes the pretend price)"}
+  },
+  "ttl": {"min_minutes": 1, "default_minutes": 30, "max_minutes": 240},
+  "cost": {"hourly_usd": 0.0, "param_rates": {"tier": {"small": 0.5, "large": 4.0}}},
+  "approval_rules": [],
+  "max_extensions": 2
+}

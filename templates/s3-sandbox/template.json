@@ -1,0 +1,13 @@
+{
+  "name": "s3-sandbox",
+  "title": "S3 sandbox bucket",
+  "description": "A private, encrypted S3 bucket for experiments. Objects expire after 3 days and the bucket is emptied automatically when the environment is destroyed.",
+  "provider": "aws",
+  "params": {
+    "versioning": {"type": "boolean", "default": false, "description": "Keep old versions of objects"}
+  },
+  "ttl": {"min_minutes": 15, "default_minutes": 240, "max_minutes": 1440},
+  "cost": {"hourly_usd": 0.001, "param_rates": {"versioning": {"true": 0.001, "false": 0.0}}},
+  "approval_rules": [],
+  "max_extensions": 3
+}

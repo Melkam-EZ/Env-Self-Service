@@ -1,0 +1,9 @@
+{
+  "_comment": "Overrides for envp defaults (see envp/config.py). Delete a key to use its default.",
+  "max_ttl_minutes": 1440,
+  "approval_cost_threshold_usd": 5.0,
+  "max_active_per_team": 5,
+  "team_monthly_budget_usd": {"default": 50.0, "payments": 100.0},
+  "expiry_warning_minutes": 15,
+  "workers": 2
+}

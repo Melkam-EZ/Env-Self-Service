@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+          terraform_wrapper: false
+      - name: Unit and integration tests (includes a real terraform apply/destroy of local-demo)
+        run: python3 -m unittest discover -s tests -v
+      - name: Real end-to-end lifecycle (no cloud)
+        run: ./scripts/verify.sh
+      - name: terraform fmt
+        run: terraform fmt -check -recursive templates
+      - name: terraform validate every template
+        run: |
+          for t in templates/*/; do
+            echo "== $t"
+            terraform -chdir="$t" init -backend=false -input=false
+            terraform -chdir="$t" validate
+          done

@@ -1,0 +1,22 @@
+{
+  "name": "ec2-dev",
+  "title": "EC2 dev box",
+  "description": "An Amazon Linux 2023 instance with no inbound ports. Connect through SSM Session Manager (no SSH keys). Runs in the account's default VPC.",
+  "provider": "aws",
+  "params": {
+    "instance_type": {"type": "enum", "values": ["t3.micro", "t3.small", "t3.medium", "t3.large"], "default": "t3.micro", "description": "Instance size"},
+    "volume_gb": {"type": "integer", "min": 8, "max": 50, "default": 10, "description": "Root disk size in GB"}
+  },
+  "ttl": {"min_minutes": 30, "default_minutes": 240, "max_minutes": 480},
+  "cost": {
+    "hourly_usd": 0.0,
+    "param_rates": {
+      "instance_type": {"t3.micro": 0.0104, "t3.small": 0.0208, "t3.medium": 0.0416, "t3.large": 0.0832},
+      "volume_gb": {"per_unit": 0.00011}
+    }
+  },
+  "approval_rules": [
+    {"param": "instance_type", "in": ["t3.large"], "reason": "t3.large instances need approval"}
+  ],
+  "max_extensions": 1
+}
